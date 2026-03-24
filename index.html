@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Allen Kalampukattussery — Resume</title>
   <meta name="description" content="Resume of Allen Kalampukattussery — QC & Bioinformatics professional based in San Jose, CA." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Allen Kalampukattussery — Resume" />
+  <meta property="og:description" content="QC & Bioinformatics professional — wet lab to pipeline. Based in San Jose, CA." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://akalampukattussery.github.io" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Allen Kalampukattussery — Resume" />
+  <meta name="twitter:description" content="QC & Bioinformatics professional — wet lab to pipeline. Based in San Jose, CA." />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <!-- Favicon: olive AK monogram -->
@@ -25,7 +33,15 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 52px; /* offset for sticky nav */
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
 
     body {
       background: var(--bg);
@@ -114,7 +130,13 @@
       z-index: 100;
     }
 
-    .nav-inner { display: flex; }
+    .nav-inner {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
 
     nav a {
       font-size: 10.5px;
@@ -378,6 +400,62 @@
     }
     .tag:hover { background: var(--bg3); border-color: var(--olive-xlt); color: var(--olive); }
 
+    /* ── DOWNLOAD BUTTON ── */
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+      padding: 0.6rem 1.3rem;
+      background: transparent;
+      border: 1.5px solid var(--olive);
+      color: var(--olive);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dl-btn:hover { background: var(--olive); color: var(--bg); }
+    .dl-btn svg { width: 13px; height: 13px; fill: currentColor; }
+
+    /* ── COPY EMAIL BUTTON ── */
+    .copy-email {
+      cursor: pointer;
+      background: none;
+      border: none;
+      font: inherit;
+      color: var(--muted);
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .copy-email:hover { color: var(--olive); }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--olive);
+      color: var(--bg);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 0.55rem 1.25rem;
+      border-radius: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 999;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     /* ── FOOTER ── */
     footer {
       padding: 2.5rem 0 3rem;
@@ -463,7 +541,7 @@
       <div class="contact-row">
         <span>San Jose, CA</span>
         <span class="sep">·</span>
-        <a href="mailto:allenjgk@gmail.com">allenjgk@gmail.com</a>
+        <button class="copy-email" onclick="copyEmail()" title="Copy email address">allenjgk@gmail.com</button>
         <span class="sep">·</span>
         <a href="tel:7813256568">781-325-6568</a>
         <span class="sep">·</span>
@@ -471,6 +549,10 @@
         <span class="sep">·</span>
         <a href="https://github.com/akalampukattussery" target="_blank" rel="noopener">GitHub</a>
       </div>
+      <a class="dl-btn" href="Allen_Kalampukattussery_Resume.pdf" download>
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 12l-4-4h2.5V2h3v6H12L8 12zm-5 2h10v1.5H3V14z"/></svg>
+        Download Resume
+      </a>
     </header>
   </div>
 
@@ -674,8 +756,17 @@
 
   </div>
 
+  <div class="toast" id="toast">Email copied!</div>
+
   <script>
-    // Active nav highlight on scroll
+    function copyEmail() {
+      navigator.clipboard.writeText('allenjgk@gmail.com').then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a');
 
