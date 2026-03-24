@@ -4,7 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Allen Kalampukattussery — Resume</title>
+  <meta name="description" content="Resume of Allen Kalampukattussery — QC & Bioinformatics professional based in San Jose, CA." />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Favicon: olive AK monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%235a6438'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-size='14' font-style='italic' fill='%23f4f1eb'>AK</text></svg>" />
+
   <style>
     :root {
       --bg:       #f4f1eb;
@@ -36,7 +41,7 @@
       padding: 0 2rem;
     }
 
-    /* HEADER */
+    /* ── HEADER ── */
     header {
       padding: 5.5rem 0 4rem;
       border-bottom: 1.5px solid var(--border);
@@ -59,13 +64,22 @@
       line-height: 1.0;
       letter-spacing: -0.01em;
       color: var(--ink);
-      margin-bottom: 1.4rem;
+      margin-bottom: 0.6rem;
     }
 
     h1 span {
       display: block;
       color: var(--olive);
       font-style: italic;
+    }
+
+    .tagline {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
     }
 
     .summary {
@@ -84,12 +98,13 @@
       font-size: 12.5px;
       color: var(--muted);
       letter-spacing: 0.03em;
+      align-items: center;
     }
     .contact-row a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .contact-row a:hover { color: var(--olive); }
     .sep { margin: 0 0.75rem; color: var(--border); }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: sticky;
       top: 0;
@@ -111,10 +126,22 @@
       padding: 1rem 1.4rem;
       border-right: 1px solid var(--border);
       transition: color 0.2s;
+      position: relative;
     }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--olive);
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+    nav a.active { color: var(--olive); }
+    nav a.active::after { transform: scaleX(1); }
     nav a:hover { color: var(--olive); }
 
-    /* SECTIONS */
+    /* ── SECTIONS ── */
     section {
       padding: 4rem 0;
       border-bottom: 1.5px solid var(--border);
@@ -139,20 +166,26 @@
       background: var(--border);
     }
 
-    /* JOB */
+    /* ── JOB ── */
     .job {
-      margin-bottom: 3.25rem;
-      padding-bottom: 3.25rem;
-      border-bottom: 1px solid var(--bg3);
+      margin-bottom: 3rem;
+      padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+      border-left: 2px solid var(--border);
+      border-radius: 0 4px 4px 0;
+      transition: border-color 0.25s, background 0.25s;
     }
-    .job:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .job:last-child { margin-bottom: 0; }
+    .job:hover {
+      border-left-color: var(--olive);
+      background: rgba(90, 100, 56, 0.03);
+    }
 
     .job-meta {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       flex-wrap: wrap;
-      gap: 0.25rem;
+      gap: 0.2rem 1rem;
       margin-bottom: 0.15rem;
     }
 
@@ -165,17 +198,18 @@
     }
 
     .job-date {
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--muted);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       white-space: nowrap;
+      font-weight: 400;
     }
 
     .job-company {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 500;
       color: var(--olive-lt);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 1.1rem;
     }
@@ -189,7 +223,7 @@
     }
 
     .job li {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--ink2);
       font-weight: 300;
       padding-left: 1.2rem;
@@ -204,7 +238,69 @@
       color: var(--olive-xlt);
     }
 
-    /* EDUCATION */
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--olive-xlt);
+      border-radius: 0 4px 4px 0;
+      padding: 1.5rem 1.75rem;
+      transition: border-left-color 0.25s, background 0.25s;
+    }
+    .project-card:hover {
+      border-left-color: var(--olive);
+      background: var(--bg3);
+    }
+
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+
+    .project-context {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--olive-lt);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--ink2);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .project-tag {
+      font-size: 11px;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--olive);
+      border: 1px solid var(--olive-xlt);
+      border-radius: 3px;
+      padding: 0.15rem 0.55rem;
+    }
+
+    /* ── EDUCATION ── */
     .edu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -243,7 +339,7 @@
       text-transform: uppercase;
     }
 
-    /* SKILLS */
+    /* ── SKILLS ── */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -278,11 +374,11 @@
       border: 1px solid var(--border);
       border-radius: 3px;
       padding: 0.2rem 0.6rem;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
     .tag:hover { background: var(--bg3); border-color: var(--olive-xlt); color: var(--olive); }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
       padding: 2.5rem 0 3rem;
       text-align: center;
@@ -291,7 +387,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* ANIMATIONS */
+    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -303,11 +399,54 @@
     .stagger > *:nth-child(3) { animation-delay: 0.28s; }
     .stagger > *:nth-child(4) { animation-delay: 0.38s; }
 
+    /* ── PRINT ── */
+    @media print {
+      @page { margin: 1.8cm 1.6cm; size: A4; }
+      * { animation: none !important; transition: none !important; }
+      body { background: #fff; color: #1a1c17; font-size: 10.5pt; line-height: 1.55; }
+      nav, footer, .project-tags, .tag-cloud { display: none; }
+      .container { max-width: 100%; padding: 0; }
+      header { padding: 0 0 1.2rem; border-bottom: 1.5pt solid #c8c4b8; margin-bottom: 1rem; }
+      .eyebrow { font-size: 8pt; color: #5a6438; }
+      h1 { font-size: 28pt; margin-bottom: 0.3rem; }
+      h1 span { color: #5a6438; }
+      .tagline { font-size: 8pt; color: #888; margin-bottom: 0.8rem; }
+      .summary { font-size: 9.5pt; color: #333; margin-bottom: 0.8rem; max-width: 100%; }
+      .contact-row { font-size: 8.5pt; color: #666; }
+      .contact-row a { color: #5a6438; }
+      .sep { margin: 0 0.4rem; }
+      section { padding: 1rem 0; border-bottom: 1pt solid #ddd; page-break-inside: avoid; }
+      section:last-of-type { border-bottom: none; }
+      .section-label { font-size: 7.5pt; letter-spacing: 0.2em; color: #5a6438; margin-bottom: 1rem; }
+      .section-label::after { background: #ddd; }
+      .job { margin-bottom: 1.1rem; padding: 0.7rem 0.9rem; border-left: 2pt solid #b5bf8e; page-break-inside: avoid; background: none !important; }
+      .job-title { font-size: 13pt; }
+      .job-date { font-size: 8pt; color: #888; }
+      .job-company { font-size: 8pt; letter-spacing: 0.08em; color: #7a8a4e; margin-bottom: 0.5rem; }
+      .job li { font-size: 9pt; color: #333; line-height: 1.55; padding-left: 1rem; margin-bottom: 0.15rem; }
+      .job li::before { color: #b5bf8e; }
+      .projects-grid { display: block; }
+      .project-card { margin-bottom: 0.9rem; padding: 0.7rem 0.9rem; border: none; border-left: 2pt solid #b5bf8e; background: none; page-break-inside: avoid; }
+      .project-title { font-size: 12pt; }
+      .project-context { font-size: 8pt; color: #7a8a4e; margin-bottom: 0.4rem; }
+      .project-desc { font-size: 9pt; color: #333; line-height: 1.5; margin-bottom: 0; }
+      .edu-grid { display: flex; gap: 1.5rem; }
+      .edu-card { border: 1pt solid #ddd; padding: 0.75rem 1rem; background: none; flex: 1; }
+      .edu-degree { font-size: 12pt; }
+      .edu-school { font-size: 9pt; color: #555; }
+      .edu-date { font-size: 8pt; color: #5a6438; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    /* ── MOBILE ── */
     @media (max-width: 580px) {
       header { padding: 3.5rem 0 2.5rem; }
       section { padding: 2.75rem 0; }
       nav a { padding: 0.85rem 1rem; font-size: 9.5px; }
-      .job-meta { flex-direction: column; }
+      .job-meta { flex-direction: column; gap: 0.1rem; }
+      .job-date { order: 2; }
+      .job-title { order: 1; }
+      .job { padding: 1.25rem 1.25rem 1.25rem 1.25rem; }
     }
   </style>
 </head>
@@ -317,15 +456,20 @@
     <header>
       <div class="eyebrow">Resume · 2025</div>
       <h1>Allen<span>Kalampukattussery</span></h1>
+      <div class="tagline">QC &amp; Bioinformatics &nbsp;—&nbsp; Wet Lab to Pipeline</div>
       <p class="summary">
-        Quality control professional with over two years of experience in cGMP-regulated pharmaceutical and biotech laboratories. M.S. in Bioinformatics, San Jose State University.
+        Quality control professional with over two years of experience in cGMP-regulated pharmaceutical and biotech laboratories. M.S. in Bioinformatics from San Jose State University, with hands-on experience spanning molecular diagnostics, genome assembly, and machine learning.
       </p>
       <div class="contact-row">
         <span>San Jose, CA</span>
         <span class="sep">·</span>
-        <a href="/cdn-cgi/l/email-protection#e5848989808b8f828ea58288848c89cb868a88"><span class="__cf_email__" data-cfemail="77161b1b12191d101c37101a161e1b5914181a">[email&#160;protected]</span></a>
+        <a href="mailto:allenjgk@gmail.com">allenjgk@gmail.com</a>
         <span class="sep">·</span>
         <a href="tel:7813256568">781-325-6568</a>
+        <span class="sep">·</span>
+        <a href="https://www.linkedin.com/in/allen-kalampukattussery/" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="sep">·</span>
+        <a href="https://github.com/akalampukattussery" target="_blank" rel="noopener">GitHub</a>
       </div>
     </header>
   </div>
@@ -334,6 +478,7 @@
     <div class="container">
       <div class="nav-inner">
         <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
         <a href="#education">Education</a>
         <a href="#skills">Skills</a>
       </div>
@@ -342,6 +487,7 @@
 
   <div class="container">
 
+    <!-- EXPERIENCE -->
     <section id="experience">
       <div class="section-label">Experience</div>
       <div class="stagger">
@@ -387,10 +533,10 @@
           <ul>
             <li>Performed RNAi experiments in planthoppers, including RNA extraction, DNA extraction, and PCR for gene knockdown studies.</li>
             <li>Quantified nucleic acid concentration and purity using Qubit fluorometry.</li>
+            <li>Performed gel electrophoresis for verification of PCR products and nucleic acid quality assessment.</li>
             <li>Assembled and curated three bacterial endosymbiont genomes from raw sequencing data, performing data quality assessment at each stage of the bioinformatics pipeline.</li>
             <li>Conducted pairwise evolutionary divergence analysis using codeML and R to identify biologically meaningful variation across species.</li>
             <li>Applied statistical and computational methods in R and Python for data analysis, visualization, and technical reporting.</li>
-            <li>Performed gel electrophoresis for verification of PCR products and nucleic acid quality assessment.</li>
             <li>Maintained live planthopper colonies and host plant cultures, monitoring health and ensuring consistent experimental conditions.</li>
             <li>Designed and developed containment enclosures for insect rearing and experimental housing.</li>
           </ul>
@@ -399,6 +545,45 @@
       </div>
     </section>
 
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-label">Projects</div>
+      <div class="projects-grid stagger">
+
+        <div class="project-card">
+          <div class="project-title">Gel Image Segmentation via CNN–ViT Hybrid</div>
+          <div class="project-context">SJSU M.S. Bioinformatics · 2025</div>
+          <p class="project-desc">
+            Developed a deep learning pipeline combining a convolutional neural network with a Vision Transformer (ViT) architecture in PyTorch to perform automated segmentation of gel electrophoresis images. Trained, validated, and evaluated model performance on annotated gel image datasets.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">PyTorch</span>
+            <span class="project-tag">CNN</span>
+            <span class="project-tag">Vision Transformer</span>
+            <span class="project-tag">Image Segmentation</span>
+            <span class="project-tag">Python</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title">Long-Read Sequencing Artifact Detection Pipeline</div>
+          <div class="project-context">SJSU M.S. Bioinformatics · 2025</div>
+          <p class="project-desc">
+            Built a reproducible Nextflow pipeline for detecting and characterizing sequencing artifacts in long-read human genomic data. Pipeline covered quality control, alignment, artifact identification, and summary reporting across configurable reference inputs.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Nextflow</span>
+            <span class="project-tag">Long-Read Sequencing</span>
+            <span class="project-tag">Bioinformatics</span>
+            <span class="project-tag">Pipeline Development</span>
+            <span class="project-tag">Linux</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
     <section id="education">
       <div class="section-label">Education</div>
       <div class="edu-grid stagger">
@@ -415,6 +600,7 @@
       </div>
     </section>
 
+    <!-- SKILLS -->
     <section id="skills">
       <div class="section-label">Skills</div>
       <div class="skills-grid stagger">
@@ -441,8 +627,12 @@
             <span class="tag">DNA/RNA Extraction</span>
             <span class="tag">PCR</span>
             <span class="tag">Gel Electrophoresis</span>
+            <span class="tag">Qubit Fluorometry</span>
+            <span class="tag">RNAi</span>
+            <span class="tag">BSL-2</span>
             <span class="tag">Aseptic Technique</span>
             <span class="tag">Microbiological Methods</span>
+            <span class="tag">Plating &amp; Culturing</span>
             <span class="tag">Media Preparation</span>
             <span class="tag">Instrument Calibration</span>
             <span class="tag">Liquid Handling</span>
@@ -455,8 +645,10 @@
             <span class="tag">Python</span>
             <span class="tag">R</span>
             <span class="tag">SQL</span>
+            <span class="tag">PyTorch</span>
             <span class="tag">NumPy</span>
             <span class="tag">Pandas</span>
+            <span class="tag">Nextflow</span>
             <span class="tag">Microsoft Office</span>
             <span class="tag">AI/LLM Tools</span>
           </div>
@@ -477,3 +669,28 @@
     </section>
 
     <footer>
+      Allen Kalampukattussery &nbsp;·&nbsp; allenjgk@gmail.com &nbsp;·&nbsp; San Jose, CA
+    </footer>
+
+  </div>
+
+  <script>
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
